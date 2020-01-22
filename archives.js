@@ -1,3 +1,5 @@
+const largestProduct = require('./support')
+
 // Find the sum of all the multiples of 3 or 5 below 1000.
 function threesAndFives(max = 1000){
     const arr = []
@@ -96,3 +98,44 @@ function smallestMultiple(num){
 console.log('smallestMultiple: ', smallestMultiple(20));
 
 
+// Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
+function sumSquareDifference(num){
+    let sum1 = 0
+    let sum2 = 0
+    while(num > 0){
+        sum1 += num * num
+        sum2 += num
+        num--
+    }
+    return (sum2 * sum2) - sum1
+}
+console.log('sumSquareDifference: ', sumSquareDifference(100));
+
+
+// By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+// What is the 10,001st prime number?
+function tenThousandAndFirstPrime(num = 10001){
+
+}
+console.log('tenThousandAndFirstPrime: ', tenThousandAndFirstPrime(6));
+
+
+// Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
+function largestProductInASeries(input){
+    const products = []
+    for(let i = 0; i < input.length; i++){
+        let str = input.slice(i, i + 13)
+        const res = str.split('').map(item=>parseInt(item)).reduce((total, num)=>total * num)
+        products.push(res)
+    }
+    return products.sort((a, b) => b - a)[0]
+}
+console.log('largestProductInASeries: ', largestProductInASeries(largestProduct));
+
+
+// A Pythagorean triplet is a set of three natural numbers, a < b < c, for which, a2 + b2 = c2
+// There exists exactly one Pythagorean triplet for which a + b + c = 1000. Find the product abc.
+function specialPythagoreanTriplet(){
+
+}
+console.log('specialPythagoreanTriplet: ', specialPythagoreanTriplet(1000));
