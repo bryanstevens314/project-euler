@@ -1,4 +1,4 @@
-const largestProduct = require('./support')
+const support = require('./support')
 
 // Find the sum of all the multiples of 3 or 5 below 1000.
 function threesAndFives(max = 1000){
@@ -8,7 +8,8 @@ function threesAndFives(max = 1000){
     }
     return arr.reduce((total, num)=> total + num)
 }
-console.log('threesAndFives: ', threesAndFives(1000));
+
+// console.log('threesAndFives: ', threesAndFives(1000));
 
 
 // By considering the terms in the Fibonacci sequence whose values do not exceed four million, 
@@ -25,7 +26,7 @@ function evenFibonacciNumbers(items){
     }
     return recursive(items).filter(item => {if (item % 2 === 0) return item}).reduce((total, num) => total + num)
 }
-console.log('evenFibonacciNumbers', evenFibonacciNumbers(31));
+// console.log('evenFibonacciNumbers', evenFibonacciNumbers(31));
 
 
 // What is the largest prime factor 
@@ -51,7 +52,7 @@ function largestPrimeFactor(num){
     /*initialize the variable that will represent the biggest prime factor. biggest is equal to the last position of the array, that is the biggest prime factor (we have to subtract 1 of .length in order to obtain the index of the last item)*/
     return primeFactors[primeFactors.length - 1];
 }
-console.log('largestPrimeFactor: ', largestPrimeFactor(600851475143));
+// console.log('largestPrimeFactor: ', largestPrimeFactor(600851475143));
 
 
 // Find the largest palindrome made from the product of two 3-digit numbers.
@@ -69,7 +70,7 @@ function largestPalindromeProduct(base1 = 999, base2 = 999){
     }
     return res.sort()[res.length -1]
 }
-console.log('largestPalindromeProduct: ', largestPalindromeProduct());
+// console.log('largestPalindromeProduct: ', largestPalindromeProduct());
 
 
 // 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
@@ -95,7 +96,7 @@ function smallestMultiple(num){
     }
     return res
 }
-console.log('smallestMultiple: ', smallestMultiple(20));
+// console.log('smallestMultiple: ', smallestMultiple(20));
 
 
 // Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
@@ -109,15 +110,34 @@ function sumSquareDifference(num){
     }
     return (sum2 * sum2) - sum1
 }
-console.log('sumSquareDifference: ', sumSquareDifference(100));
+// console.log('sumSquareDifference: ', sumSquareDifference(100));
 
 
 // By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
 // What is the 10,001st prime number?
-function tenThousandAndFirstPrime(num = 10001){
-
+function isPrime(num){
+    if(num <= 1) return false
+    if(num <= 3) return true
+    var flag = true
+    for(let i =2; i < 9; i++){
+        if(num === i) continue
+        if(num % i === 0) {
+            flag = false
+            break
+        }
+    }
+    return flag
 }
-console.log('tenThousandAndFirstPrime: ', tenThousandAndFirstPrime(6));
+function tenThousandAndFirstPrime(num = 10001){
+    const primeNums = []
+    var count = 2
+    while(primeNums.length < num){
+        if(isPrime(count)) primeNums.push(count)
+        count++
+    }
+    return primeNums.pop()
+}
+// console.log('*********************************tenThousandAndFirstPrime: ', tenThousandAndFirstPrime(10001));
 
 
 // Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
@@ -130,7 +150,7 @@ function largestProductInASeries(input){
     }
     return products.sort((a, b) => b - a)[0]
 }
-console.log('largestProductInASeries: ', largestProductInASeries(largestProduct));
+// console.log('largestProductInASeries: ', largestProductInASeries(support.largestProduct));
 
 
 // A Pythagorean triplet is a set of three natural numbers, a < b < c, for which, a2 + b2 = c2
@@ -138,4 +158,46 @@ console.log('largestProductInASeries: ', largestProductInASeries(largestProduct)
 function specialPythagoreanTriplet(){
 
 }
-console.log('specialPythagoreanTriplet: ', specialPythagoreanTriplet(1000));
+// console.log('specialPythagoreanTriplet: ', specialPythagoreanTriplet(1000));
+
+
+// In the 20×20 grid below, four numbers along a diagonal line have been marked in red.
+// What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
+// function chunk(){
+//     let temp = columns
+//     let row = 0
+//     const arr = [[]]
+//     input.split(' ').forEach(item=>{
+//         if(temp > 0){
+//             arr[row].push(item)
+//             temp--
+//         } else {
+//             arr.push([])
+//             temp = columns
+//             row++
+//         }
+//     })
+//     return arr
+// }
+// function largestGroupInGrid(input, columns = 20){
+//     input = chunk(input, columns = 20)
+//     const position = [0,0]
+//     const res = []
+//     for(let i = 0; i < input.length; i++){
+        
+//     }
+
+// }
+// console.log('largestGroupInGrid: ', largestGroupInGrid(support.largestGroup));
+
+module.exports = {
+    threesAndFives,
+    evenFibonacciNumbers,
+    largestPrimeFactor,
+    largestPalindromeProduct,
+    smallestMultiple,
+    sumSquareDifference,
+    tenThousandAndFirstPrime,
+    largestProductInASeries,
+    specialPythagoreanTriplet,
+}
